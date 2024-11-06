@@ -1,0 +1,12 @@
+for one in scoreone:
+	#for two in scorerest:
+		if scoreone.count(one) >1:
+			print('ALERT!! Duplicates found:',one)
+			break
+			
+		elif one in scorerest:
+			print('ALERT!! Duplicates found:',one)
+			break
+		else:
+				continue
+	
