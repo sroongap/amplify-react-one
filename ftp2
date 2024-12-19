@@ -1,0 +1,62 @@
+import re
+import os,sys
+from bs4 import BeautifulSoup
+
+directory = 'sub66'
+filelist = os.listdir(directory)
+#print(filelist)
+
+filearray = []
+for file in filelist:
+	filearray.append(file)
+
+#print(filearray)
+
+def fileopener(i):
+	file = directory+'/'+filearray[i]
+	f = open(file,'r',encoding = 'utf-8')
+	read = f.read()
+	soup = BeautifulSoup(read,'html.parser')
+	#print(soup)
+	sp = soup.text.split()
+	txt = ' '.join(sp)
+	return txt
+	#print(txt)
+
+def seethrough(i):
+	file = directory+'/'+filearray[i]
+	f = open(file,'r',encoding = 'utf-8')
+	read = f.read()
+	soup = BeautifulSoup(read,'html.parser')
+	print(soup.text[200:450])
+
+
+def matx(pattern,txt):
+	matx = re.findall(pattern, txt.lower(),re.IGNORECASE)
+
+	for m in matx:
+		print(m)
+	
+from createdic import dynamicprint
+	
+
+def compileandsearch(txt):
+	msg = '' #add before timedict
+	cp = re.compile(dynamicprint(3,msg))
+	#print(dynamicprint(3,msg))
+	matc = cp.search(txt)
+	if matc:
+		print(matc.group(0))
+	else:
+		#print('hello')
+		return 'hello'
+	
+
+for i in range(0,3):
+	txt= fileopener(i)
+	show=compileandsearch(txt)
+	if show=='hello':
+		print('\n')
+	
+		seethrough(i)
+	
